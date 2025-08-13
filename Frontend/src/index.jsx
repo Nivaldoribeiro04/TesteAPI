@@ -1,13 +1,3 @@
-import React, { useEffect, useState } from "react";
-
-function App() {
-  const [root, setMensagem] = useState("");
-
-  useEffect(() => {
-    fetch("/api/main/root") // rota da sua API no Vercel
-      .then((res) => res.json())
-      .then((data) => setMensagem(data.texto));
-  }, []);
 
 function myButton(){
     return(
@@ -18,7 +8,7 @@ function myButton(){
 }
 
 
-function MyApp() {
+export default function MyApp() {
     return(
         <div>
             <h1>
@@ -28,5 +18,4 @@ function MyApp() {
         </div>
     );
 
-}
 }
