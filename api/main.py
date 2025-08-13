@@ -1,5 +1,4 @@
 from fastapi import FastAPI, File, UploadFile
-
 from typing import Annotated
 
 
@@ -15,9 +14,9 @@ async def admin():
     return{"Admin": "Tela admin"}
 
 
-# @app.post("/files/")
-# async def create_file(file: Annotated[bytes, File()]):
-#     return{"file_size": len(file)}
+@app.post("/files/")
+async def create_file(file: Annotated[bytes, File()]):
+    return{"file_size": len(file)}
 
 @app.post("/uploadfile/")
 async def create_upload_file(file: UploadFile):
