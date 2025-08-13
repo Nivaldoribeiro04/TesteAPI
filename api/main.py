@@ -3,6 +3,7 @@ from fastapi import FastAPI, File, UploadFile
 from typing import Annotated
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
+from fastapi.responses import RedirectResponse
 
 
 
@@ -23,7 +24,7 @@ async def root():
 
 @app.get("/admin")
 async def admin():
-    return{"Admin": "Tela admin"}
+    return RedirectResponse(url="index.html")
 
 
 @app.post("/files/")
