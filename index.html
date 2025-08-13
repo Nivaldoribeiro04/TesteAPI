@@ -4,31 +4,19 @@
     <meta charset="utf-8" />
     <title>Página HTML</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      body { font-family: sans-serif; padding: 24px; }
-      button { padding: 8px 14px; }
-    </style>
+    <style>body{font-family:sans-serif;padding:24px}</style>
   </head>
   <body>
-    <h1>Bem-vindo à página</h1>
-    <button id="btn">Clique Aqui</button>
-    <p id="out"></p>
-
+    <h1>Funcionou 🎉</h1>
+    <p>Esta é a página estática na raiz.</p>
+    <button id="btn">Chamar API</button>
+    <pre id="out"></pre>
     <script>
-      // Se seu arquivo Python é api/main.py, a rota base é /api/main
-      // Se for api/index.py, a rota base vira /api
-      const apiBase = "/api/main";
-
-      document.getElementById('btn').addEventListener('click', async () => {
-        try {
-          const r = await fetch(`${apiBase}`);
-          const data = await r.json();
-          document.getElementById('out').textContent = data.message ?? JSON.stringify(data);
-        } catch (e) {
-          document.getElementById('out').textContent = "Erro ao chamar API";
-          console.error(e);
-        }
-      });
+      // como o arquivo é api/index.py, a base é /api
+      document.getElementById('btn').onclick = async () => {
+        const r = await fetch('/api');
+        document.getElementById('out').textContent = await r.text();
+      };
     </script>
   </body>
 </html>
