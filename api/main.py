@@ -3,15 +3,13 @@ from fastapi import FastAPI, File, UploadFile
 from typing import Annotated
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
-from fastapi.responses import RedirectResponse
-from fastapi.staticfiles import StaticFiles
+
 
 
 
 
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 app.add_middleware(
@@ -29,7 +27,7 @@ async def root():
 
 @app.get("/admin")
 async def admin():
-    return RedirectResponse(url="/static/index.html")
+    return {"Message":"Página Admin"}
 
 
 @app.post("/files/")
