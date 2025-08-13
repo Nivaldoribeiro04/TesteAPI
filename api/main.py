@@ -29,7 +29,7 @@ async def root():
 
 @app.get("/admin")
 async def admin():
-    return RedirectResponse(url="index.html")
+    return RedirectResponse(url="/static/index.html")
 
 
 @app.post("/files/")
