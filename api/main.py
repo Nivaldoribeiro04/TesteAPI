@@ -38,7 +38,7 @@ async def create_file(file: Annotated[bytes, File()]):
 
 @app.post("/uploadfile/")
 async def create_upload_file(file: UploadFile):
-    if file.content_type != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" or file.content_type != "application/vnd.ms-excel":
+    if file.content_type != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
          return{"Erro": "Aquivo não é valido, por favor coloque um no formato xlsx ou xls"}
     
     else:
