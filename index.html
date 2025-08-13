@@ -14,7 +14,7 @@
     <script>
       // como o arquivo é api/index.py, a base é /api
       document.getElementById('btn').onclick = async () => {
-        const r = await fetch('/api/');
+        const r = await fetch('/api/main.py');
         document.getElementById('out').textContent = await r.text();
       };
     </script>
