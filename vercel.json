@@ -1,6 +1,7 @@
 {
   "routes": [
     { "src": "/", "dest": "/api/main.py" },
-    { "src": "/(.*)", "dest": "/api/main.py" }
+    { "src": "/(.*)", "dest": "/api/main.py" },
+    { "src": "/redirecionar", "dest": "/static/index.html"}
   ]
 }
