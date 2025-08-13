@@ -4,10 +4,15 @@ from typing import Annotated
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
+
 
 
 
 app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 
 app.add_middleware(
     CORSMiddleware,
