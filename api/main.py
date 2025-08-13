@@ -5,11 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 
 
-
-
-
 app = FastAPI()
-
 
 
 app.add_middleware(
@@ -46,10 +42,7 @@ async def create_upload_file(file: UploadFile):
         excel_data = BytesIO(file_content)
         # Usa pandas para ler o Excel
         df = pd.read_excel(excel_data)
-        #df = df.where(pd.notnull(df), None)
-        # df = df.dropna()  # Remove as linhas que possuem valores NaN
-        # # ou
-        # 
+
         result = []
         for index, row in df.iterrows():
             if row.dropna().any():  # Verifica se há algum valor não nulo
