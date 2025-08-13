@@ -1,7 +1,8 @@
+from io import BytesIO
 from fastapi import FastAPI, File, UploadFile
 from typing import Annotated
 from fastapi.middleware.cors import CORSMiddleware
-
+import pandas as pd
 
 
 
@@ -31,4 +32,27 @@ async def create_file(file: Annotated[bytes, File()]):
 
 @app.post("/uploadfile/")
 async def create_upload_file(file: UploadFile):
-    return {"Tipo do arquivo": file.content_type}
+    if file.content_type != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" or file.content_type != "application/vnd.ms-excel":
+         return{"Erro": "Aquivo não é valido, por favor coloque um no formato xlsx ou xls"}
+    
+    else:
+        df =pd.DataFrame()
+        file_content = await file.read()
+        # Converte os bytes em um objeto BytesIO (buffer)
+        excel_data = BytesIO(file_content)
+        # Usa pandas para ler o Excel
+        df = pd.read_excel(excel_data)
+        #df = df.where(pd.notnull(df), None)
+        # df = df.dropna()  # Remove as linhas que possuem valores NaN
+        # # ou
+        # 
+        result = []
+        for index, row in df.iterrows():
+            if row.dropna().any():  # Verifica se há algum valor não nulo
+                result.append(row.to_dict())  # Adiciona a linha se não for vazia
+                
+        # Se o resultado não estiver vazio, converter para JSON
+        if result:
+            df_filtered = pd.DataFrame(result)  # Cria um novo dataframe com as linhas filtradas
+            json_result = df_filtered.to_json(orient="records")  # Converte para JSON
+            return {"Retorno Arquivo Json": json_result}
