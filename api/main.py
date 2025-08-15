@@ -41,7 +41,7 @@ async def create_upload_file(file: UploadFile):
         # Converte os bytes em um objeto BytesIO (buffer)
         excel_data = BytesIO(file_content)
         # Usa pandas para ler o Excel
-        df = pd.read_excel(excel_data)
+        df = pd.read_excel(excel_data, engine='openpyxl')
 
         result = []
         for index, row in df.iterrows():
